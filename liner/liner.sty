@@ -1,0 +1,37 @@
+\ProvidesPackage{liner}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage[left=3cm,right=3cm,top=4cm,bottom=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage[none]{hyphenat}
+\usepackage[skip=6pt,indent=0pt]{parskip}
+
+\pagestyle{empty}
+\hfuzz=3pt
+
+\newcommand{\mysectionl}[2]{%
+    \vspace{1cm}%
+    \begin{flushleft}%
+        \section*{\LARGE #1}%
+        \vspace{-2mm}%
+        \small \bf #2 \\%
+        \rule[2mm]{12cm}{0.1mm} \\%
+    \end{flushleft}%
+}
+
+\newcommand{\mysectionr}[2]{%
+    \vspace{1cm}%
+    \begin{flushright}%
+        \section*{\LARGE #1}%
+        \vspace{-2mm}%
+        \small \bf #2 \\%
+        \rule[2mm]{12cm}{0.1mm} \\%
+    \end{flushright}%
+}
+
+\newcommand{\io}{\rule{0.5pt}{2ex}\hspace{2pt}}         % 1
+\newcommand{\iz}{\rule{0.5pt}{0.75ex}\hspace{2pt}}      % 0
+\newcommand{\jo}{\rule{0.5pt}{2ex}\rule{2pt}{0.5pt}}    % ligature 1
+\newcommand{\jz}{\rule{0.5pt}{0.75ex}\rule{2pt}{0.5pt}} % ligature 0

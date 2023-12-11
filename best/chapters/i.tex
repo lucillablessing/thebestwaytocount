@@ -1,0 +1,47 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{introduction}
+
+let's talk about the Hindu-Arabic numerals. so deeply ingrained in our lives that some people don't even know them by name,\myfootnote[i]{} so widespread that you'll find them in almost every country on the planet, and so ubiquitous that we often forget they are not numbers -- just one of many ways of \emph{writing} numbers.
+
+the Hindu-Arabic numerals are a {\it positional} numeral system: the value of each digit is affected by its position in the string. historically, this was quite a revolution compared to the existing systems, and it made them one of the most important inventions in the history of mathematics. numbers have no upper limit dictated by the limit of symbols -- you can write all infinitely many natural numbers using just ten digits. nor does the length of these strings get out of hand quickly -- every additional digit gets you ten times further than the previous one did, and even a number in the millions takes just seven digits to write. moreover, positional notation is {\it injective}: every natural number has exactly one representation.
+
+because we take all these properties for granted, it's easy to forget that they're not at all self-evident, and how something as fundamental as the way we count can make a huge impact on how fast mathematics can develop and progress.
+
+but what if there was a bug with the Hindu-Arabic numerals? a flaw in their design which, despite all their wonderful properties, prevents them from being the best they could possibly be? well, there is such a bug, filed as bug report number ten: the choice of ten as a base.
+
+being the sum of the first four positive integers, the number ten was sacred to the ancient Greeks,\myfootnote[i]{} although a much more likely reason why we use base ten is because of the number of fingers most people have. but the choice of ten is actually arbitrary, independent of positional notation: the same system would work with any integer base greater than 1. and ever since humans understood their own numeral system, they realized that some bases are mathematically better than other bases -- and it turns out ten is not a particularly good choice.
+
+that's why on the educational side of YouTube, you have lots of videos talking about how we should all switch to base twelve, called ``dozenal''. but why stop there? maybe base twelve is better than base ten, but if we should bother using an alternative numeral system, shouldn't we go for one that's even better?
+
+among educational videos talking about numeral systems, one stands out with a particularly in-depth analysis of what makes certain bases better than others. it's called {\it a better way to count}, and its author, jan Misali, says that their personal favorite base, a base better than both ten and twelve, is base six, which they call ``seximal''.\mytranscript{2:46} given that {\it a better way to count} has over a million views, is over 18 minutes long, and has an entire response video answering some common counterarguments, it seems that seximal is a pretty big deal.
+
+\newpage
+
+now, there's no reason not to let anyone believe in what they think is best, but just so we're on the same page here, jan Misali is wrong. seximal is not the best base out there. so fasten your mathematical seatbelts, because we're going down a deep rabbit hole -- on a quest to discover binary, the \emph{actual} best way to count.
+
+\sectionbreak
+
+binary, or base two, is an extreme case. it's the smallest possible positional system, using only two symbols -- say, black and white dots -- to represent all the natural numbers. it's also a decomposition of numbers into {\it additive primes} -- powers of two, playing a similar role for addition as ordinary primes for multiplication;\mytranscript{3:43} and it's also a maximally efficient game of {\it twenty questions}, singling out a number's position on the number line by halving the possible range with each bit.\mytranscript{3:50} binary has appeared in ancient Egyptian mathematics,\myfootnote[i]{} in the 16th-century works of Leibniz,\myfootnote[i]{} in the counting system of the people of Mangareva,\myfootnote[i]{} and in the Arecibo message\myfootnote[i]{} -- and, of course, in nearly every modern computer.
+
+but binary isn't just the natural base. no, binary is also the base best suited for human use: by nearly any metric for comparing bases to each other, binary is the one that performs the best of all. and the best thing is: the latter is because of the former. binary is the best base specifically \emph{because} it's the smallest possible base -- because 2 is the successor of 1.
+
+in contrast, a base like seximal, Misali's favorite, is indeed a very good base, but its merit is almost entirely due to a mathematical coincidence: 6 contains the first two primes and is adjacent to the next two primes. seximal is a cheater in the world of bases, and a more thorough analysis exposes the shallowness of its tricks and reveals a gaping emptiness underneath. meanwhile, binary shines without the need for coincidences -- it plays fair and square, and that fairness pays off in the end.
+
+of course, not everyone thinks the same way, otherwise there would be no reason to be making this video. so since it's meant to be a response to {\it a better way to count}, let's start by looking at what Misali thinks of binary. the following audio clip and image are from {\it seximal responses}, which has a section comparing the pros and cons of lots of different bases, including binary. so let's listen to what binary has going for it!
+
+\begin{quoting}
+	base two: binary. binary is the smallest base that actually works... at all. doing simple arithmetic in binary is super easy, and only having two digits means storing binary information on a computer is maximally efficient. that's about it for positives! every other aspect of binary is a downside. numbers get real long real fast and the only terminating ratios are the ones where the denominator is a power of two. oh, by the way, the ratios I'm showing in red here are the ones that are as complex as they hypothetically could be. you know, the really bad ones. and, yes, I'm using underlines instead of overlines for recurring digits.
+\end{quoting}
+
+that's it? really? does the person who made the most in-depth analysis about base six really think that all aspects of binary can be dismissed in just 30 seconds?
+
+essentially, Misali seems to have a ``theory of everything'' for positional notation, namely that the merit of bases can be reduced just to the period lengths of small fractions. this can be seen in {\it seximal responses} as well as the program BASE OFF, which picks an optimal base for the user based on feedback from questions that are... entirely about fractional expansions.\myfootnote[i]{} or look at this segment from a collaboration with Artifexian about designing a number system: they pick one power-of-two base by just straight up listing a bunch of fractional expansions and picking the column with the most ``winners''!\myfootnote[i]{} ...
+
+the way a base writes simple ratios is important, but it's nowhere even \emph{close} to being the holy grail for comparing different bases to each other. it's as oversimplified as saying that a writing system's merit is entirely tied to the number of strokes needed to write simple words. don't worry, we'll go very in-depth about exactly \emph{why} this analysis is insufficient to fully determine the quality of a base, and probably discover some ``fundamental truths'' along the way.
+
+so let's take a deep dive, on a journey of mathematical truthmaking, to dissect both binary and seximal, and get to the bottom of positional notation.
+
+\end{document}

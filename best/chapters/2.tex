@@ -1,0 +1,33 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter[two]{most people have twice one less than six fingers}
+
+pretty much any argument in favor of any base will bring up finger counting at one point or another. after all, ten fingers is pretty much \emph{the} reason why decimal is the dominant counting system in the world today, so it would be a mistake to ignore it in this analysis.
+
+in decimal, finger counting involves extending all fingers of one hand first, going from zero to five, and then using the other hand to go from five to ten, and then you're out of fingers. isn't this a bit wasteful, though? for all of these, either one hand has no fingers extended or the other hand has all five fingers extended. what if you took advantage of the fact that you can extend or retract each finger independently and counted like this:\mytranscript{18:08}
+
+you most likely already know about binary finger counting -- it's nothing new.\myfootnote{} you might argue that it's not that good of a finger counting system in the first place, since it requires you to control each of your fingers independently of one another, which many people can't do. we'll get to that, but binary finger counting also has a deeper point to make, which we'll discover when we analyze methods of finger counting more broadly.
+
+you know how seximal finger counting is presented as being superior to decimal because it uses each hand as a separate digit of a two-digit number, getting you from 0 to 36?\myfootnote{} it's neat, but check this out: you can do the same thing in decimal as well. use the first four fingers of one hand to count from zero to four, then just the thumb for five, then the other fingers again to get from five to nine. you just counted from zero to ten on one hand, and you can use the other hand to get you from 0 to 100: about three times as far as in seximal. this counting method originates from Korea, and is known as {\it chisanbop}.\myfootnote{}
+
+the main point here is that having a finger counting system isn't just a true-false question. on the one hand, finger counting can be adapted to virtually any base because of how flexible it is; on the other hand, we can analyze them all together from an outside perspective to see how they compare.
+
+binary finger counting, chisanbop, seximal, and decimal are all constructed according to the same principle: the set of fingers is divided into subsets, then each subset is considered a separate digit whose value can range anywhere from zero to all fingers -- thus one more than the number of fingers -- and then all of those are multiplied together to arrive at the upper limit of numbers that can be represented. the methods we've looked at can be considered to lie on a spectrum in this construction, from binary treating each finger as a separate digit, all the way to decimal treating all fingers together as one big digit.\myfootnote{}
+
+the key insight from these methods is that they essentially rely on choices between addition, on one end of the spectrum, and multiplication, on the other. and since multiplication grows so much faster than addition, the largest possible upper limit is achieved \emph{only} by considering each finger as a separate digit, which corresponds to the binary method.\myfootnote{} the seximal method, presented as so ingenious and elegant, is actually surprisingly \emph{inefficient}, keeping everything additive on the fingers of each hand. it's only barely better than the worst method, the traditional decimal one.\myfootnote{}
+
+there's also a recognizability issue. if you're shown this seximal number, how can you tell if it's dozen three or thirsy two? you can't.\mytranscript{20:32} even if you establish a convention, it's very easy to make a mistake. binary, however, covers roughly the same range on \emph{one} hand as seximal does on \emph{both}. and in this case, the reading is unambiguous -- always starting at the thumb as the least significant bit -- because a single hand is chiral, while a pair of hands is not.
+
+but there's an even more subtle point at play here. finger counting systems like seximal, or decimal, or even chisanbop, all rely on that magical number five -- and while it happens to work out for most people, everyone else is excluded. the binary method, however, works regardless of how many fingers you count on, because it treats each finger as a unit, without the assumption of belonging to a group of five members. binary counting includes everyone -- and every alternate history where humans ended up with fewer or more than five fingers in each hand.\myfootnote{}
+
+so if you can't independently control all of your fingers? ...just use only three on each hand, and you can \emph{still} count higher than with the seximal method. add just one finger, and you surpass chisanbop.
+
+there's even more to binary counting than that. it's not just about fingers: binary counting stands out in how it can be implemented on almost anything,\myfootnote{} and it tickles our human brains with how simple, zen-like, mechanical, and... musical it is. that's right, rhythm in many styles of music around the world is binary: we use binary note lengths and binary time signatures, and many pieces of music are in effect binary counters -- you can literally practice finger binary on them. this quote from John Nystrom's own proposal of a binary system sums this up perfectly:\myfootnote{}
+
+\begin{quoting}
+	Now, suppose that a musician is requested to divide [their] notes, bars and burdens into fifths or tenths, according to the decimal system, then ask the musician to play a decimal piece of music, and it will sound very much like the decimal system introduced in the shops and markets.
+\end{quoting}
+
+\end{document}

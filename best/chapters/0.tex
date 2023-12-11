@@ -1,0 +1,35 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter[zero]{binary numbers are long}
+
+there's no denying that binary representations of numbers are notoriously long. one hundred takes seven binary digits, one thousand takes ten, and one million takes twenty -- far more than their decimal, dozenal, or even seximal counterparts. and this is where most people stop when considering binary as an option for human use. but why? maybe the problem isn't with binary itself, but with a specific \emph{notation} of binary.
+
+our choice of black and white dots for the binary digits is arbitrary -- and rather atypical. the most common choice are the Hindu-Arabic numerals, 0 and 1. this is a special case of using a subset of the Hindu-Arabic numerals to notate bases smaller than decimal, like how {\it a better way to count} notates seximal.
+
+for bases of similar size to decimal, this is a natural and logical choice. but for \emph{binary}, it makes absolutely no sense to do this. the two binary digits only need to be distinct from each other, not from eight other unused symbols. this is the equivalent of using Chinese characters to write English, but by just picking twenty-six characters to substitute for Latin letters.
+
+moreover, research in linguistics has shown that even if some languages are spoken faster than others, most convey information at about the same rate -- and the same principle applies to written symbols as well.\myfootnote{} so if binary digits are only worth one bit of information, their shapes can be designed much simpler -- and much thinner. say, two vertical bars: low for 0, high for 1.\mytranscript{8:43} \emph{now} the comparisons between big numbers in decimal and in binary seem a whole lot more reasonable.
+
+seximal can't really do the same thing: it's significantly smaller than ten where using the traditional ten digits creates a noticeable disadvantage, but it's also not \emph{that} much smaller that you can invent alternative symbols that fix this issue and are simple enough to subvert the traditional digits.\myfootnote{}
+
+but now our numbers look too similar to a barcode. the digits are too hard to read, and also hard to align in the vertical dimension. fortunately, there's a very easy solution to all of those problems, and to see it, we have to look at a similar problem in decimal.
+
+decimal numbers in the thousands and millions are difficult to parse at a glance, so they are usually written with separators, which split the number into digestible, equally sized chunks of digits. in binary, we can do the same thing. join groups of vertical bars with a horizontal bar -- usually threes or fours, but you could also do pairs, or unequal groups, or whatever fits.\myfootnote{}
+
+in binary specifically, such groupings can also be treated as units in their own right, like a power-of-two base. triplets of binary digits become digits of base eight; quadruplets become base sixteen, and so on. and it's \emph{these} digits that we can compare to measure number length, or align vertically under each other. such a notation allows us to combine the benefits of all these bases without any of the overhead of converting between them -- especially if you can memorize the correspondences.\myfootnote{}
+
+okay, but, are we even still using binary anymore then? aren't we using multiple bases? isn't this cheating?
+
+no, we aren't using any other bases per se. higher bases, with their own set of digits, make the underlying binary no longer explicit: such digits cannot be immediately split into bits and then easily regrouped into another combination of bits.\myfootnote{}
+
+but even if you consider such groups of bits to be entirely equivalent to their corresponding higher-base digits, there's still a difference in how some numbers are represented. consider the number one hundred again: in binary; grouped by threes; and now in octal; and rewritten as triplets of bits.\mytranscript{10:35}
+
+that's right: using power bases means sometimes adding \emph{redundant zeros}.\myfootnote{} and we'll see time and time again that it makes them just plain worse than their non-power counterparts. four is worse than two; one hundred is worse than ten; thirty-six is worse than six.\myfootnote{} even the genetic code is technically more wasteful by being quaternary than if it was binary.\myfootnote{}
+
+finally, one important difference is how human-sized these groupings are. in seximal, the square base is just on the edge of being too large. and base one hundred, compressed decimal, is so big that only Ithkuil dares to use it.\myfootnote{} meanwhile, binary gives us access to at least three or even four higher levels of compression before they become too large to keep track of.
+
+this ability to view the same number at many different scales is one of the biggest and most important perks of binary, one that will keep coming up again and again. binary happens to be tiny enough where such things, often overlooked, are possible, and open up worlds of possibilities.
+
+\end{document}

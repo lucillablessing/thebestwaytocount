@@ -1,0 +1,43 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{chapter one}
+
+\myfootnote{} to be a bit nitpicky, though, {\it a better way to count} got the numbers wrong: dozenal out-bases decimal at $10^{13}$, not $12^{13}$. after all, $12^{13}$ is when \emph{dozenal} numbers get longer by one digit, so if they've been out-basing decimal by then, they have before as well. similarly, decimal out-bases seximal at $6^4$, not $10^4$.
+
+\myfootnote{} for example, a base-9 digit is worth \emph{two} base-3 digits, not three. accordingly, $\log 9 = 2 \times \log 3$.
+
+\myfootnote{} obviously, base $e$ can't possibly be the most efficient. not only does it represent every positive integer greater than 2 as an infinite aperiodic sequence of digits: you can't even have ``e distinct digits'' in the first place, so base $e$ needs to have 3 digits -- which automatically makes it wasteful, since with 3 digits it could be more efficient by having 3 as its base.
+
+\myfootnote{} base 3 misconception: \\
+\myurl{https://en.wikipedia.org/wiki/Ternary_numeral_system\#Practical_usage} \\
+\myurl{https://seximal.net/names-of-other-bases}
+
+\myfootnote{} the number 0 is a bit of a strange case. in some contexts it makes sense that 0 should correspond to the empty string, but that's not actually practically usable. it's an exception, but we can just ignore it.
+
+\myfootnote{} logarithm... to what base? we need to make an arbitrary choice here, but it turns out it doesn't actually matter, since in the formula for radix economy we'll divide by such a logarithm again, and this arbitrary choice of base will cancel out.
+
+\myfootnote{} as a bonus, if we compare binary and \emph{decimal}, the first range where decimal is more efficient is from $2^{53}$ to $10^{16}$, which has to do with $2^{53}$ starting with a 9 in decimal. more on that in a bit.
+
+\myfootnote{} base 4 only looks more efficient than base 2 when the digits of both are artificially bloated up to the same (decimalish) size: we've already established in chapter zero that this is unfair and wasteful.
+
+\myfootnote{} the ``$1 / \log_{b-1}(n)$'' part is equivalent to ``$\log_n(b - 1)$'', which is how it is to be read (and how Desmos evaluates it) for $b = 2$.
+
+\myfootnote{} Desmos graphs in this chapter: \\
+\myurl{https://desmos.com/calculator/piu9zofsdn} (out-base) \\
+\myurl{https://desmos.com/calculator/hqdwv2elke} (radix cost) \\
+\myurl{https://desmos.com/calculator/qbkzr0dywv} (radix economy)
+
+\myfootnote{} radix economy on Wikipedia: \\
+\myurl{https://en.wikipedia.org/wiki/Radix_economy}
+
+\myfootnote{} another way to put this has to do with that $2^{53}$ thing from earlier. notice how for every base there are small regions where the radix economy function falls below 1? these maximum efficiency regions correspond to numbers where the leading digit has its highest possible value -- which it \emph{always} has in binary.
+
+\myfootnote{} this fact is actually used in many implementations of floating-point arithmetic.
+
+\myfootnote{} to be precise, this is what causes the huge step up in efficiency from base 3 to base 2 -- it's not what causes base 2 to be the most efficient in the first place. even without this leading digit thing, binary would still win, it'd just be a lot harder to see.
+
+\myfootnote{} by multiplying by $b$ rather than $\log b$, the formula on Wikipedia is actually measuring something entirely different, something like the complexity of a combination lock or tally counter -- which, granted, really is minimized in base 3. but we're looking at \emph{information}, and as we've already seen, this corresponds not to the base itself, but its logarithm. this would treat niftimal digits as \emph{six} times as heavy as seximal digits, even though we know a niftimal digit is worth \emph{two} seximal digits.
+
+\end{document}

@@ -1,0 +1,327 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage{magic}
+
+\title{the best way to count \\ \Large bonus: magic sequences}
+\author{Lucilla}
+\date{}
+
+\begin{document}
+
+\vfill \maketitle \vfill \newpage
+
+\begin{definition}[floor, fract]
+	the \emph{floor function} $x \mapsto \floor{x}$ is defined as the largest integer less than or equal to $x$. \\ it satisfies $\floor{x} = x$ for integer $x$ and $x - 1 < \floor{x} < x$ otherwise. \\ this function is idempotent: $\floor{\floor{x}} = \floor{x}.$ \bigskip
+
+	the \emph{fractional part function} $x \mapsto \fract{x}$ is defined as $x - \floor{x}$. \\ it satisfies $\fract{x} = 0$ for integer $x$ and $0 < \fract{x} < 1$ otherwise. \\ this function is idempotent: $\fract{\fract{x}} = \fract{x}$. \\ it is also periodic with period $1$; if $n$ is an integer, then $\fract{x + n} = \fract{x}$.
+\end{definition} \bigskip
+
+\begin{definition}[div, mod]
+	the \emph{Euclidean division functions} \tdiv{} and \tmod{} are defined as follows:
+
+	\begin{itemize}
+		\item $a \fdiv b = \floor{a / b}$;
+		\item $a \fmod b = b \cdot \fract{a / b}$.
+	\end{itemize}
+
+	\tdiv{} and \tmod{} satisfy the \emph{Euclidean division theorem}: \\ for any integer $a$ and natural number $b$ with $b \neq 0$, there exist integers $q$ and $r$ such that $0 \leq r < b$ and $a = q \cdot b + r$, namely $q = a \fdiv b$ and $r = a \fmod b$. \medskip
+
+	the simultaneous application of \tdiv{} and \tmod{} is denoted \tdivmod; the statement $a \fdivmod b = (q, r)$ is to be read as $a \fdiv b = q \ \wedge \ a \fmod b = r$.
+\end{definition} \bigskip
+
+\begin{definition}[magic sequence]
+	let $b$ be a natural number (the \emph{base}); $b > 1$. \\
+	let $n$ be a natural number, $n > 1$. \\
+	let $s$ be a natural number, $1 \leq s < n$. \medskip
+
+	the \emph{magic sequence} for $n$ in \emph{base} $b$ with \emph{offset} $s$ (usually $s = 1$) is an infinite sequence of integers $\m{mag}_i$ ($i \geq 0$) defined recursively as:
+
+	\begin{itemize}
+		\item $\m{mag}_0 = s$;
+		\item $\m{mag}_{i + 1} = (b \cdot \m{mag}_i) \fmod n$.
+	\end{itemize}
+
+	the corresponding \emph{quotient sequence} is the sequence $\m{div}_i$ ($i \geq 1$) defined as \\ $\m{div}_{i + 1} = (b \cdot \m{mag}_i) \fdiv n$.
+\end{definition} \bigskip
+
+example of a magic sequence with $b = 6, n = 11, s = 1$:
+
+\begin{itemize}
+	\item $\m{mag}_0 = 1$;
+	\item $(1 \cdot 6) \fdivmod 11 = (0, 6) \ \Rightarrow \ \m{div}_1 = 0, \ \m{mag}_1 = 6;$
+	\item $(6 \cdot 6) \fdivmod 11 = (3, 3) \ \Rightarrow \ \m{div}_2 = 3, \ \m{mag}_2 = 3;$
+	\item $(3 \cdot 6) \fdivmod 11 = (1, 7) \ \Rightarrow \ \m{div}_3 = 1, \ \m{mag}_3 = 7;$
+	\item $(7 \cdot 6) \fdivmod 11 = (3, 9) \ \Rightarrow \ \m{div}_4 = 3, \ \m{mag}_4 = 9;$
+	\item \ldots
+\end{itemize}
+
+\newpage
+
+\section*{magic sequence divisibility test}
+
+\begin{lemma}
+	let $u, v$ be integers, and let $n$ be a natural number, $n > 1$. then:
+	\begin{itemize}
+		\item $(u + v) \fmod n = ((u \fmod n) + (v \fmod n)) \fmod n$;
+		\item $(u \cdot v) \fmod n = ((u \fmod n) \cdot (v \fmod n)) \fmod n$.
+	\end{itemize}
+\end{lemma}
+
+\begin{proof}
+	the first statement is equivalent to
+	\begin{equation*}
+		\fract{x + y} = \fract{\fract{x} + \fract{y}}
+	\end{equation*}
+	by setting $x := \frac{u}{n}, \ y := \frac{v}{n}$; observe that
+	\begin{equation*}
+		  \fract{\fract{x} + \fract{y}}
+		= \fract{x - \floor{x} + y - \floor{y}}
+		= \fract{x + y - (\floor{x} + \floor{y})};
+	\end{equation*}
+	noting that $(\floor{x} + \floor{y})$ is an integer completes the equality. \bigskip
+
+	the second statement is equivalent to
+	\begin{equation*}
+		  \fract{\frac{u}{n} \cdot \frac{v}{n} \cdot n}
+		= \fract{\fract{\frac{u}{n}} \cdot \fract{\frac{v}{n}} \cdot n}
+	\end{equation*}
+	where the right-hand side can be expanded as
+	\begin{align*}
+		    \fract{\fract{\frac{u}{n}} \cdot \fract{\frac{v}{n}} \cdot n}
+		& = \fract{
+			\left(\frac{u}{n} - \floor{\frac{u}{n}}\right) \cdot
+			\left(\frac{v}{n} - \floor{\frac{v}{n}}\right) \cdot n
+		} \\
+		& = \fract{
+			\left(
+			         \frac{u}{n}  \cdot        \frac{v}{n}
+			-        \frac{u}{n}  \cdot \floor{\frac{v}{n}}
+			- \floor{\frac{u}{n}} \cdot        \frac{v}{n}
+			+ \floor{\frac{u}{n}} \cdot \floor{\frac{v}{n}}
+			\right) \cdot n
+		} \\
+		& = \fract{
+			\frac{u}{n} \cdot \frac{v}{n} \cdot n +
+			\left(
+			      \floor{\frac{u}{n}} \cdot \floor{\frac{v}{n}} \cdot n
+			    - u \cdot \floor{\frac{v}{n}}
+			    - v \cdot \floor{\frac{u}{n}}
+			\right)
+		}
+	\end{align*}
+	and again noting that
+	\begin{equation*}
+		\left(
+			\floor{\frac{u}{n}} \cdot \floor{\frac{v}{n}} \cdot n
+			- u \cdot \floor{\frac{v}{n}}
+			- v \cdot \floor{\frac{u}{n}}
+		\right)
+	\end{equation*}
+	is an integer.
+\end{proof}
+
+\begin{corollary}
+	variants where only one variable has had \tmod{} applied to it, namely
+	\begin{equation*}
+		\begin{array}{c}
+			(u + v) \fmod n = (u + (v \fmod n)) \fmod n \\
+			(u \cdot v) \fmod n = (u \cdot (v \fmod n)) \fmod n
+		\end{array}
+	\end{equation*}
+	follow with a similar proof. alternatively, they can be derived by applying the normal variant twice, then using the idempotence of \tmod{} (which follows from the idempotence of the fractional part function) on one of the variables, then applying the normal variant backwards.
+\end{corollary}
+
+\newpage
+
+\begin{lemma}
+	let $\m{mag}_i$ be the magic sequence of $n$ in base $b$ with offset $s$. then
+	\begin{equation*}
+		(s \cdot b^i) \fmod n = \m{mag}_i
+	\end{equation*}
+	for all $i \geq 0$.
+\end{lemma}
+
+\begin{proof}
+	induction for $i$.
+
+	let $i = 0$, then we have $s \fmod n = s$, which is true because $1 \leq s < n$. \smallskip
+
+	suppose the statement is true for some $i$, then
+	\begin{align*}
+		    \m{mag}_{i + 1}
+		& = (b \cdot \m{mag}_i) \fmod n \\
+		& = (b \cdot (s \cdot b^i) \fmod n) \fmod n \\
+		& = (b \cdot s \cdot b^i) \fmod n \\
+		& = (s \cdot b^{i + 1}) \fmod n,
+	\end{align*}
+	thus the statement is true for $i + 1$, and hence for all $i \geq 0$.
+\end{proof}
+
+\begin{definition}[base-$b$ representation]
+	let $b$ be a natural number (the \emph{base}); $b > 1$. \\
+	let $\m{num}$ be a natural number, $\m{num} \geq 0$. \medskip
+
+	the \emph{base-$b$ representation} of $\m{num}$ is a sequence $d_i$ ($i \geq 0$) which satisfies $0 \leq d_i < b$ for all $i$, only finitely many $d_i$ are nonzero, and
+	\begin{equation*}
+		\sum_i b^i \cdot d_i = \m{num}.
+	\end{equation*}
+
+	the sequence $d_i$ exists and is unique. $d_i$ are called the \emph{digits} of $\m{num}$ in base $b$.
+\end{definition}
+
+\begin{theorem}[magic sequence divisibility test]
+	let $\m{mag}_i$ be the magic sequence of $n$ in base $b$ with offset $s = 1$. \\
+	let $\m{num}$ be a natural number, and let $d_i$ be its digits in base $b$. \\
+	then
+	\begin{equation*}
+		\m{num} \fmod n = \Big( \sum_i \m{mag}_i \cdot d_i \Big) \fmod n.
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		    \m{num} \fmod n
+		  = \Big( \sum_i b^i \cdot d_i \Big) \fmod n
+		& = \sum_i \big( (b^i \cdot d_i) \fmod n \big) \fmod n \\
+		& = \sum_i \big( ((b^i \fmod n) \cdot d_i) \fmod n \big) \fmod n \\
+		& = \sum_i \big( (\m{mag}_i \cdot d_i) \fmod n \big) \fmod n \\
+		& = \Big( \sum_i \m{mag}_i \cdot d_i \Big) \fmod n.
+	\end{align*}
+\end{proof}
+
+\section*{magic sequence fractions}
+
+\begin{lemma}
+	let $\m{mag}_i$ be the magic sequence of $n$ in base $b$ with offset $s$, \\
+	and let $\m{div}_i$ be the corresponding quotient sequence. then
+	\begin{equation*}
+		\frac{s \cdot b^i}{n}
+		- b^{i - 1} \cdot \m{div}_1
+		- b^{i - 2} \cdot \m{div}_2
+		- \ldots
+		- \m{div}_i
+		= \frac{\m{mag}_i}{n}
+	\end{equation*}
+	for all $i \geq 0$.
+\end{lemma}
+
+\begin{proof}
+	induction for $i$.
+
+	let $i = 0$, then we have
+	\begin{equation*}
+		\frac{s \cdot b^0}{n} = \frac{s}{n} = \frac{\m{mag}_0}{n}.
+	\end{equation*}
+	\smallskip
+
+	suppose the statement is true for some $i$, then \bigskip
+	\begin{align*}
+		&   \hphantom{=\ } \frac{s \cdot b^{i + 1}}{n}
+		  - b^{i}     \cdot \m{div}_1
+		  - b^{i - 1} \cdot \m{div}_2
+		  - \ldots
+		  - b         \cdot \m{div}_i
+		  - \m{div}_{i + 1} \\
+		& = b \cdot \left(
+		    \frac{s \cdot b^i}{n}
+		  - b^{i - 1} \cdot \m{div}_1
+		  - b^{i - 2} \cdot \m{div}_2
+		  - \ldots
+		  - \m{div}_i
+		  \right)
+		  - \m{div}_{i + 1} \\
+		& = \frac{b \cdot \m{mag}_i}{n} - \m{div}_{i + 1} \\
+		& = \frac{b \cdot \m{mag}_i}{n} - (b \cdot \m{mag}_i) \fdiv n \\
+		& = \frac{b \cdot \m{mag}_i}{n} - \floor{\frac{b \cdot \m{mag}_i}{n}}
+		  = \fract{\frac{b \cdot \m{mag}_i}{n}} \\
+		& = \frac{(b \cdot \m{mag}_i) \fmod n}{n}
+		  = \frac{\m{mag}_{i + 1}}{n},
+		\end{align*}
+	thus the statement is true for $i + 1$ and hence for all $i \geq 0$.
+\end{proof}
+
+\begin{definition}[base-$b$ fractional expansion]
+	let $b$ be a natural number (the \emph{base}); $b > 1$. \\
+	let $\m{ratio}$ be a real number, $0 \leq \m{ratio} < 1$. \medskip
+
+	the \emph{base-$b$ fractional expansion} of $\m{ratio}$ is a sequence $r_i$ ($i \geq 1$) which satisfies \\ $0 \leq r_i < b$ for all $i$ and
+	\begin{equation*}
+		\m{ratio} - \frac{1}{b^k} < \sum_{i \leq k} \frac{r_i}{b^i} \leq \m{ratio}
+	\end{equation*}
+	for all $k \geq 1$. \medskip
+
+	the sequence $r_i$ exists and is unique. $r_i$ are called the \emph{digits} of $\m{ratio}$ in base $b$, and it holds that
+	\begin{equation*}
+		\sum_i^{\infty} \frac{r_i}{b^i} = \m{ratio}.
+	\end{equation*}
+	(the second condition is necessary for uniqueness. without it, some real numbers have two different fractional expansions, e.g. $\frac{1}{5} = 0.1999\ldots = 0.2000\ldots$ in base ten. with this definition, only $0.2000\ldots$ is a valid fractional expansion.)
+\end{definition}
+
+\begin{theorem}[magic sequence fractions]
+	let $\m{mag}_i$ be the magic sequence of $n$ in base $b$ with offset $s$, \\
+	and let $\m{div}_i$ be the corresponding quotient sequence. \\
+	let $r_i$ be the digits of $s/n$ in base $b$. \\
+	then $\m{div}_i = r_i$ for all $i \geq 1$.
+\end{theorem}
+
+\begin{proof}
+	induction for $i$.
+
+	first let $i = 1$. suppose $\frac{s}{n} = \frac{r_1}{b}$ exactly.
+	then $r_1 = \frac{s \cdot b}{n}$. but $r_1$ must be an integer,
+	so take
+	\begin{equation*}
+		  \floor{\frac{s \cdot b}{n}}
+		= (s \cdot b) \fdiv n
+		= (b \cdot \m{mag}_0) \fdiv n
+		= \m{div}_1
+	\end{equation*}
+	instead.
+	the inequality $x - 1 < \floor{x} \leq x$ for the floor function then implies the inequality
+	\begin{equation*}
+		\frac{s}{n} - \frac{1}{b} < \frac{r_1}{b} \leq \frac{s}{n}.
+	\end{equation*} \bigskip
+
+	now suppose $\m{div}_j = r_j$ for all $j \leq i$. suppose
+	\begin{equation*}
+		  \frac{s}{n}
+		= \frac{r_1}{b}
+		+ \frac{r_2}{b^2}
+		+ \ldots
+		+ \frac{r_i}{b^i}
+		+ \frac{r_{i + 1}}{b^{i + 1}}
+	\end{equation*}
+	exactly; this implies
+	\begin{equation*}
+		  \frac{s}{n}
+		- \frac{\m{div}_1}{b}
+		- \frac{\m{div}_2}{b^2}
+		- \ldots
+		- \frac{\m{div}_i}{b^i}
+		= \frac{r_{i + 1}}{b^{i + 1}}.
+	\end{equation*}
+	in that case
+	\begin{equation*}
+		  r_{i + 1}
+		= b \cdot \left(
+		  \frac{s \cdot b^i}{n}
+		- b^{i - 1} \cdot \m{div}_1
+		- b^{i - 2} \cdot \m{div}_2
+		- \ldots
+		- \m{div}_i
+		\right),
+	\end{equation*}
+	which by the lemma above is equal to $b \cdot \frac{\m{mag}_{i + 1}}{n}$.
+	but $r_{i + 1}$ must be an integer,
+	so take
+	\begin{equation*}
+		  \floor{\frac{b \cdot \m{mag}_{i + 1}}{n}}
+		= (b \cdot \m{mag}_{i + 1}) \fdiv n
+		= \m{div}_{i + 1}
+	\end{equation*}
+	instead; and again the floor function inequality implies
+	\begin{equation*}
+		\frac{s}{n} - \frac{1}{b^{i + 1}} < \sum_{j \leq i + 1} \frac{r_j}{b^j} \leq \frac{s}{n}.
+	\end{equation*}
+\end{proof}
+
+\end{document}

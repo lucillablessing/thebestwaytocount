@@ -1,0 +1,82 @@
+\ProvidesPackage{magic}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[none]{hyphenat}
+\usepackage[skip=3pt,indent=0pt]{parskip}
+\usepackage{thmtools}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+
+\declaretheoremstyle[
+    bodyfont=\normalfont,
+    headfont=\normalfont\bf\bigskip,
+    headformat={theorem\NOTE},
+    headpunct={},
+    notebraces={}{},
+    notefont=\normalfont\sf,
+    numbered=no
+]{theorem}
+\declaretheoremstyle[
+    bodyfont=\normalfont,
+    headfont=\normalfont\bf\medskip,
+    headformat={lemma},
+    headpunct={},
+    notebraces={}{},
+    notefont=\normalfont\sf,
+    numbered=no
+]{lemma}
+\declaretheoremstyle[
+    bodyfont=\normalfont,
+    headfont=\normalfont\bf\bigskip,
+    headformat={definition\NOTE},
+    headpunct={},
+    notebraces={}{},
+    notefont=\normalfont\sf,
+    numbered=no
+]{definition}
+\declaretheoremstyle[
+    bodyfont=\normalfont,
+    headfont=\normalfont\bf\smallskip,
+    headformat={corollary},
+    headpunct={},
+    notebraces={}{},
+    notefont=\normalfont\sf,
+    numbered=no
+]{corollary}
+
+\declaretheorem[
+    postheadhook=\newpage,
+    shaded={},
+    style=theorem
+]{theorem}
+\declaretheorem[
+    postheadhook=\newpage,
+    shaded={},
+    style=lemma
+]{lemma}
+\declaretheorem[
+    postheadhook=\newpage,
+    shaded={},
+    style=definition
+]{definition}
+\declaretheorem[
+    postheadhook=\newpage,
+    shaded={},
+    style=corollary
+]{corollary}
+
+\renewenvironment{proof}[1][]{\textbf{proof: }}{\hfill $\blacksquare$ \bigskip}
+
+\newcommand{\m}{\mathsf}
+\newcommand{\fdiv}{\;\mathsf{div}\;}
+\newcommand{\fmod}{\;\mathsf{mod}\;}
+\newcommand{\fdivmod}{\;\mathsf{divmod}\;}
+\newcommand{\tdiv}{\textsf{div}}
+\newcommand{\tmod}{\textsf{mod}}
+\newcommand{\tdivmod}{\textsf{divmod}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\fract}[1]{\left\{ #1 \right\} }

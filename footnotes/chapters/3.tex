@@ -1,0 +1,42 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{chapter three}
+
+\myfootnote{} though even naively, it's a tradeoff between linear complexity of adding each pair of digits and logarithmic complexity of number lengths -- so intuitively smaller bases should have an advantage.
+
+\myfootnote{} for more details: all you need to do to add two binary digits is to write a 1 if they're different, and carry a 1 if both are 1 (XOR for the answer, AND for the carry). you can also carry all the way across a large streak of 1s, instead of each one individually, which massively speeds things up. (the same thing also happens in decimal, only with nines, and a lot less often.)
+
+\myfootnote{} in fact, the expected number of carries per digit is the lowest in binary, at $1/4$, while it approaches $1/2$ as the base increases.
+
+\myfootnote{} Tab's base 6 plea: \\
+\myurl{https://xanthir.com/b4y30}
+
+\myfootnote{} as opposed to the values of the carry in addition, which are just... um... 0 and 1...
+
+\myfootnote{} natural number multiplication is commutative: \\
+\myurl{https://math.stackexchange.com/questions/34131/commutativity-of-multiplication-in-mathbbn}
+
+\myfootnote{} {\it a better way to count} goes one extra step and emphasizes that only four of seximal's 36 (obfuscated ten) entries ``sound'' unfamiliar, even though what matters for the algorithm is their written forms. Shack's proposal even dismisses \emph{every single entry} as ``trivial'' except for a single ``$4 \times 4 = 24$''.
+
+\myfootnote{} the binary multiplication table is exactly just AND. in fact, the digits 0 and 1 together with the operations XOR as addition and AND as multiplication form the smallest possible finite field.
+
+\myfootnote{} this is known variously as ``ancient Egyptian'' or ``Russian'' multiplication. the very \emph{existence} of this algorithm implies that instead of multiplying in decimal, it's considered easier to convert to binary, multiply there, and then convert back: \\
+\myurl{https://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication}
+
+\myfootnote{} specifically, if a binary number $n$ consists of multiple copies of a smaller pattern $x$, then it's equal to $x$ times the pattern of starting offsets of $x$ in $n$. this is similar to how in decimal, you can immediately tell that $777,777 = 7007 \times 111$, but it's a lot simpler and more common with binary since 0 and 1 are the only digits. this is essentially reversing the multiplication algorithm in those cases where the subsequent addition step doesn't involve any carrying -- which is often the case.
+
+\myfootnote{} since every base makes multiplying by its own powers trivial, and the powers of two are the most dense.
+
+\myfootnote{} Misali's stance on long division: \\
+\myurl{https://seximal.net/math}
+
+\myfootnote{} as a bonus, since you don't even have to multiply in this algorithm to find the remainders at each step, you can skip the whole part of writing down the answer digit by digit, and just find remainders one after the other to very quickly calculate the modulo operation, sometimes called ``the fifth arithmetic operation''. of course, dividing and modulo by powers of two is far easier still, requiring you to just chop off a few of the rightmost bits. (you could in theory use this to easily perform a general divisibility test by any arbitrary number, but that's not actually necessary; anyway, there's a \emph{lot} more coming about \emph{that} topic later.)
+
+\myfootnote{} if the input to this algorithm isn't a perfect square, the algorithm never terminates, and you can do it for as long as you want to calculate the square root to any arbitrary precision.
+
+\myfootnote{} this algorithm is adapted from the Wikipedia article {\it Methods of computing square roots}. it works, though it has no citations, and is listed as ``possibly original research'': \\
+\myurl{https://en.wikipedia.org/wiki/Methods_of_computing_square_roots}
+
+\end{document}

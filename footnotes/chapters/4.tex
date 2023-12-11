@@ -1,0 +1,47 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{chapter four}
+
+\myfootnote{} by the way, those last two can be done recursively, always reducing the number of possible outcomes all the way down to a fixed set of base cases.
+
+\myfootnote{} these work because the powers of ten are all congruent to 1 modulo 9, and they're congruent to the corresponding powers of $-1$ modulo 11.
+
+\myfootnote{} actually, we can know even more: it will always divide $b^n - 1$ for some $n < b$, and in fact the smallest such $n$ will always be a factor of $b - 1$. and numbers one \emph{more} than powers of the base are relevant here because of the identity $(b + 1) \times (b - 1) = b^2 - 1$, so if the smallest such $n$ is even, (and the number for which we're trying to find the divisibility test is prime), then the number will also divide $b^{n/2} + 1$. this is sufficient to give divisibility tests for everything, because any number can be split into the part with prime factors it has in common with the base (which will divide $b^n$ for some $n$) and the part coprime to the base (which will divide $b^n \pm 1$ for some, possibly different, $n$). the most ``atomic'' divisibility tests are for every \emph{prime power}: from them, you can assemble a divisibility test for anything else, but you can't break them down any further.
+
+\myfootnote{} there are easier decimal divisibility tests for 7, such as treating the decimal number as if it were a base-3 number (e.g. $231 = 1 + (3 \times 10) + (2 \times 10^2)$ is divisible by 7 if and only if $1 + (3 \times 3) + (2 \times 3^2)$ is). also, for every number there are the very popular divisibility tests of the type ``multiply the leftmost digit by some constant, then add the remaining digits'' -- which, reducing the number's size by one digit with each iteration, take roughly as many iterations as the number has digits. but there are none that are as easy as the three types we've looked at, which essentially reduce a number to its \emph{logarithm} with each iteration.
+
+\myfootnote{} Misali's tier list argument about factors: \\
+\myurl{https://seximal.net/factors}
+
+\myfootnote{} specifically: in dozenal, doing the divisibility test for 5 recursively will eventually reduce to a base case that is still some multiple of 5 up to 144, so you need to know them by heart. in binary, on the other hand, it will recursively reduce to... some multiple of 5 up to 4 -- in other words, always to 0. usually, we associate cyclic numbers with numbers adjacent to a power of the base that end up being huge multiples, like how 7 in decimal is first reachable at 1001, which is $143 \times 7$ -- which makes it so you need to memorize 143 multiples of 7 to use the divisibility test by 1001. meanwhile, binary has the unique situation where, on the one hand, it has plenty of cyclic numbers near the start -- 3, 5, and 9 -- but on the other hand, all of those are already adjacent to a power of two, so in a way they almost aren't really cyclic in the same way at all.
+
+\myfootnote{} take a moment to verify that those are actually just special cases of the divisibility tests succeeding. for example, if a number consists of multiple disjoint copies of the bit pattern ``11'', then it's divisible by 3; notice how such a number would be guaranteed to make the ``alternating sum of single bits'' test return 0.
+
+\myfootnote{} Leibniz's quote: \\
+\myurl{http://leibniz-translations.com/prime.htm}
+
+\myfootnote{} even though seximal might appear superior to all other bases here, there actually isn't any metric with which you can quantify seximal being better than every other base in this regard. primes can only end in $1/3$ of all possible digits in seximal, but only $4/15$ in base thirty; only two possible digits in seximal, but only one in binary. also, the first number that ``looks prime but isn't'' would be $11 \times 13$ in both binary and seximal if you disallow perfect squares. speaking of detecting perfect squares...
+
+\myfootnote{} seximal squares: \\
+\myurl{https://reddit.com/r/Seximal/comments/top1kk/perfect_squares_only_end_in_13_or_4/}
+
+\myfootnote{} because in any base $b$, for any $n$, $n^2$ and $(b - n)^2$ are congruent modulo $b$.
+
+\myfootnote{} in other words, every odd perfect square must be congruent to 1 modulo 8 (which, by the way, doesn't work in octal, since the ``even number of zeros'' in binary can throw it completely off the rigid octal grid). now, every \emph{throdd} perfect square must also be congruent to 1 modulo 3, which overall means that every perfect square coprime to 6 (ending in 1 or 5 in seximal) must be congruent to 1 modulo 24. you \emph{could} consider \emph{this} as the seximal equivalent of the above, but testing divisibility by 24 requires you to look at the last \emph{three} seximal digits, which can have 9 options (this problem is due to seximal lumping two and three into a single power-of-six component; see more about it below), and this doesn't even exclude perfect squares not coprime to 6, which can't be detected using this method at all.
+
+\myfootnote{} seximal has every number divided into a power of six component and a... um... ``primes higher than 3, plus at most either a power of two or a power of three, but not both'' component... yeah, not that useful.
+
+\myfootnote{} for binary, the power of two and odd components can be treated as entirely separate ``coordinates'' of a vector, which multiply separately: $A = 2^a \times \mathsf{odd}_A$ and $B = 2^b \times \mathsf{odd}_B$ always multiply to $A \times B = 2^{a+b} \times (\mathsf{odd}_A \times \mathsf{odd}_B)$. this is not the case in seximal, where for instance $2 = 6^0 \times 2$ multiplies with $3 = 6^0 \times 3$ not to $6 = 6^0 \times 6$, but to $6 = 6^1 \times 1$. an immediate implication of this ``orthogonality'' in binary is that, as mentioned, the trailing zeros of a product are equal to the sum of trailing zeros in the multiplicands -- which is not true in seximal. in number theory terms, this boils down to the fact that $\mathbb{Z}_2$ is a field, while $\mathbb{Z}_6$ is not.
+
+\myfootnote{} you can also alternatively use negative numbers in the magic sequence, for example $-1$ and $-2$ instead of 10 and 9 in the magic sequence for 11. this can greatly decrease the sizes of the sums involved, by causing many things to cancel out. (you can actually change any number to any other as long as they're congruent to each other modulo 11. in fact this is how these tests work -- by swapping out every power of two for a much smaller number congruent to it modulo 11.)
+
+\myfootnote{} even more is true: if the result is congruent to any $x$ modulo $n$, the original number is also congruent to $x$ modulo $n$. so in particular, the tests are bijective: they're necessary and sufficient conditions for divisibility.
+
+\myfootnote{} for example, the magic sequence for 7 is $[1, 2, 4, 1\ldots]$, which obviously corresponds to the sum of triplets of bits. and one way of writing the magic sequence for 5 is $[1, 2, -1, -2, 1\ldots]$, which corresponds to the alternating sum of pairs of bits. and the magic sequence for 2 is $[1, 0, 0\ldots]$, showing that divisibility by two depends only on the least significant bit and is unaffected by all the others. binary is simple enough where these simple divisibility tests we considered at the beginning can be extended to their most general form and applied to any number whatsoever.
+
+\myfootnote{} this website actually talks about a \emph{decimal} magic sequence to test divisibility for 7: \\
+\myurl{https://math.hmc.edu/funfacts/divisibility-by-seven/}
+
+\end{document}

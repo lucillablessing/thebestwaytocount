@@ -1,0 +1,46 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{chapter five}
+
+\myfootnote{} the converse is true as well: the rational numbers are precisely those numbers which are terminating or recurring in some (integer) base, or equivalently, all bases.
+
+\myfootnote{} the value of this maximum is given by the Carmichael function. this function, at $x$, is equal to the smallest $n$ for which, for any $b$ coprime to $x$, $b^n - 1$ is guaranteed to be divisible by $x$. so ``$x$ is cyclic in base $b$'' means that this maximum $n$ is actually attained at $b$. for a concrete example, the Carmichael function of 11 is 10; so 11 is cyclic in seximal, because 11 divides $6^{10} - 1$ and does not divide any $6^n - 1$ with $n < 10$; but 11 is not cyclic in decimal, because although 11 does divide $10^{10} - 1$, it also divides $10^2 - 1$. the Carmichael function of any prime $p$ is equal to $p - 1$, hence 4 digits for $1/5$ in binary and dozenal, or 6 digits for $1/7$ in decimal and dozenal.
+
+\myfootnote{} the values of the Carmichael function for 3, 5, 7, 9, and 11 are 2, 4, 6, 6, and 10 respectively. the values for 3, 5, 9, and 11 match the period lengths in binary.
+
+\myfootnote{} this is because the Carmichael function always takes on even values for all inputs greater than 2.
+
+\myfootnote{} cyclic numbers in various bases (note that Wikipedia calls them ``full reptends'', and ``cyclic numbers'' their multiplicative complements to $b^n - 1$): \\
+\myurl{https://en.wikipedia.org/wiki/Full_reptend_prime}
+
+\myfootnote{} this deceptive position of square bases when viewed through the narrow fraction lens of base comparison possibly accounts for more errors in {\it seximal responses} than any other detail. nonary is said to be the ``most usable odd base'', because it only has one red ratio -- namely $1/2$, because its only cyclic number is 2, because it's a square. and quaternary and hex, but not octal, are said to be ``great at compressing binary'' because they have no red ratios at all, because they're squares -- as opposed to octal, which does have red ratios, because it's not a square. (you know what base is \emph{even better} at compressing binary? that's right, \emph{binary}!)
+
+\myfootnote{} again, logarithm to what base? like in chapter one, we need to make an arbitrary choice, and this time, it won't cancel out nicely in the end. it still doesn't matter, though, because we'll only be comparing if one score is bigger than another, and if so, then how many times -- both of those remain constant regardless of which base greater than 1 we use for the logarithm. when you see ``log'' in this chapter, it refers to this kind of base-agnostic logarithm -- and ``exp'' to its inverse function.
+
+\myfootnote{} beyond $1/9$, the next number that seximal does better by this metric is $1/18$, and then $1/25$. and in general, by looking at numbers up to one thousand, it seems neither base eventually wins out.
+
+\myfootnote{} if a higher base $b$ attains for some $n$ the maximum period length $m$, then its score will be $m \log b$. but then the number of digits in \emph{any} base to write $n$ will be at most $m$, so binary's score will be at most $m \log 2$, which is guaranteed to be less. so since every non-square base will have infinitely many cyclic numbers, for every such base greater than 2, there will be infinitely many cases where binary is more efficient.
+
+\myfootnote{} the proportion of denominators that result in terminating expansions converges to 0, and the proportion of those that result in recurring expansions converges to 1.
+
+\myfootnote{} the digits after the recurring point always come from the odd part, and the power of two part gives just a few leading zeros -- in bases with multiple distinct prime factors, like seximal, this is far more complicated.
+
+\myfootnote{} the balanced dozenal website (``Janus numbers''): \\
+\myurl{https://musa.bet/reverse.htm}
+
+\myfootnote{} remember how base 4 made things worse for binary fractions with odd periods? well, it causes problems here too, once again. while in binary, it's clear that $1/11$ consists of two halves which are bitwise negations of each other, this insight goes missing in base 4, where $1/11$ is r01131. so in this case, the 5-digit representation in base 4 isn't even \emph{equally} good, but actually \emph{worse} than the 10-digit representation in binary.
+
+\myfootnote{} Midy's theorem: \\
+\myurl{https://en.wikipedia.org/wiki/Midy\%27s_theorem}
+
+\myfootnote{} in fact, we could do what that balanced dozenal notation did, and introduce a special shorthand for a period that repeats, but negating its bits every time. if we ignore the question of whether it's just as easy to read in seximal -- where it stands for taking the fives' complement -- then updating our original metric with this shorthand makes binary perform \emph{even better} than before compared to seximal.
+
+\myfootnote{} as with divisibility tests, even though this is most useful for cyclic numbers, it works with any number. decreasing steps correspond to ones, and increasing or constant steps correspond to zeros. this also means the maximum possible period length of a number's magic sequence (in any base, not just binary) is given by that number's Carmichael function -- and that, just like fractional expansions, magic sequences for cyclic numbers have complementary halves.
+
+\myfootnote{} you can even start the magic sequence at any number $s$ instead of 1, and the same procedure will give you the binary expansion of $s/n$.
+
+\myfootnote{} hang on, isn't that seximal magic sequence for 11 just the reverse of the binary one? yes, but this is true only for 11 and no other number; it's because coincidentally 2 and 6 happen to be multiplicative inverses of each other in the field $\mathbb{Z}_{11}$... but $2 \times 6$ does not equal 1 in any other field.
+
+\end{document}

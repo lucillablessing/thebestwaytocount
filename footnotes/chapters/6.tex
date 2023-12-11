@@ -1,0 +1,48 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{chapter six}
+
+\myfootnote{} indeed, the ``digit-power'' approach can be seen as a lossless compression algorithm, relative to the ``digit-by-digit'' approach; the pigeonhole principle implies that any such algorithms must make some inputs longer than their uncompressed variants. their, um, ``neverthelessy'' usefulness comes from the fact that the more common inputs -- such as numbers with many zeros -- are made shorter. ``0'' digits are dropped entirely, while ``1'' digits, except for the least significant one, omit the word ``one'' and just state the power. binary, of course, has only those two options.
+
+\myfootnote{} $10^4$ is technically called ``myriad'', but that word's original meaning has essentially disappeared entirely (though the SI actually used to have ``myria-'' and ``myrio-'' prefixes). meanwhile, in some regions of India, $10^5$ is called ``lakh''.
+
+\myfootnote{} Chinese long scale: \\
+\myurl{https://en.wikipedia.org/wiki/Chinese_numerals\#Large_numbers}
+
+\myfootnote{} the -yllion system: \\
+\myurl{https://en.wikipedia.org/wiki/-yllion}
+
+\myfootnote{} if we name every power of each base, the advantage of the higher base at $n$ simplifies as:
+
+\begin{equation*}
+	  \log_{b_y}(n) - \log_{b_x}(n)
+	= \frac{\log n}{\log b_y} - \frac{\log n}{\log b_x}
+	= \left( \frac{1}{\log b_y} - \frac{1}{\log b_x} \right) \times \log n
+\end{equation*}
+
+which is a constant times $\log n$, meaning it'll grow unbounded as $n$ increases, and will always outweigh the constant disadvantage of more digit names for a large enough value of $n$. with only power-of-two powers of each base, however, now the advantage of the higher base at $n$ simplifies as follows:
+
+\begin{equation*}
+	  \log_2 \log_{b_y}(n) - \log_2 \log_{b_x}(n)
+	= \log_2 \left( \frac{\log_{b_y}(n)}{\log_{b_x}(n)} \right)
+	= \log_2 \left( \frac{\log b_x}{\log b_y} \right)
+	= \log_2 \log b_x - \log_2 \log b_y
+\end{equation*}
+
+an expression independent of $n$; a constant advantage, which is much smaller than the constant disadvantage for the digit names.
+
+\myfootnote{} originally, the proposed name for $2^4$ was ``nybble'', continuing the convention of naming double powers of two after units of information (or C-like integer data types) which can have that number of possible states. it was changed to ``hex'', from the name of the base, to increase recognizability, with an added benefit of shortening it to one syllable.
+
+\myfootnote{} using the number names up to and including {\it byteplex} for $2^{256}$, the highest number that can be represented is $2^{512} - 1$, which is a number with 155 decimal digits. meanwhile, the number of particles in the observable universe is estimated to be around $10^{80}$ -- that's roughly two byte byteplex.
+
+\myfootnote{} recursion: see footnote \recursivefootnote.
+
+\myfootnote{} previously, when we looked at digit strings, using base $2^n$ over base 2 always entailed at least two problems: rounding the number of digits up to a multiple of $n$, and requiring a grouping by $n$-tuples when it isn't always the most useful. in this case, neither problem arises. the substitution between {\it two one} and {\it three} is a simple, mechanical, reversible find-and-replace that doesn't break any of the system's neatness, and only makes many number names shorter, at the cost of introducing only one new word; apart from simplicity, there's little reason not to use it. (if anything, this case shows how lethal it can be to get trapped in one mode of thought when arguing for or against different bases, or anything for that matter.) one could go further and extend it to hex -- octal won't work, because 8 isn't a \emph{double} power of two -- but that requires \emph{eleven} new words, including names for over-decimal digits, which is far more awkward, and probably not worth it.
+
+\myfootnote{} do note, however, that this substitution isn't as compatible with the system as using {\it three} for {\it two one}. in practice, irregular power of two names like this should probably only be used in isolation, kind of like {\it dozen} is an ``irregular'' name for twelve, or {\it forty two} is an ``irregular'' name for {\it the answer to the ultimate question of life, the universe, and everything} (lojban moment).
+
+\myfootnote{} jokes aside, {\it perstack} works well as the equivalent of percentages in binary, because many common simple fractions can be expanded to a denominator of 63, 64, or 65. this works so well because none of them are prime, which -- ironically -- is because 64 is the \emph{sixth} power of two, and six is the smallest number which is neither prime (thus preventing a Mersenne prime) nor a power of two (preventing a Fermat prime).
+
+\end{document}

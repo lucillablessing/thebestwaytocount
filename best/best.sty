@@ -1,0 +1,58 @@
+\ProvidesPackage{best}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{hyperref}
+\usepackage[none]{hyphenat}
+\usepackage{ifthen}
+\usepackage{multirow}
+\usepackage[all]{nowidow}
+\usepackage[skip=12pt,indent=0pt]{parskip}
+\usepackage{quoting}
+\usepackage{subfiles}
+
+\pagestyle{empty}
+\pagenumbering{gobble}
+\setlength{\tabcolsep}{18pt}
+\setlist[1]{itemsep=-12pt}
+\setcounter{chapter}{-2}
+\hfuzz=3pt
+
+\hypersetup{
+    pdftitle={the best way to count},
+    pdfauthor=Lucilla
+}
+
+\quotingsetup{
+    font={itshape, centering},
+    leftmargin=1cm,
+    rightmargin=1cm
+}
+
+\newcommand{\sectionbreak}{\vspace{30pt} \hrule \vspace{24pt}}
+
+\newcommand{\mychapter}[2][]{%
+    \setcounter{footnote}{0}%
+    \addtocounter{chapter}{1}%
+    \ifthenelse{\equal{#1}{}}{%
+        \chapter*{#2}%
+        \vspace{-9em}%
+        \pdfbookmark[1]{#2}{#2}%
+    }{%
+        \chapter*{chapter #1 \smallskip \\ \Large #2}%
+        \vspace{-9em}%
+        \pdfbookmark[1]{chapter #1}{#1}%
+    }%
+    \vspace{6em}%
+}
+
+\newcommand{\myfootnote}[1][]{%
+    \addtocounter{footnote}{1}%
+    \textsuperscript{[%
+        \ifthenelse{\equal{#1}{}}{\arabic{chapter}}{#1}%
+    .\alph{footnote}]}%
+}
+
+\newcommand{\mytranscript}[1]{\textsuperscript{[#1]}}

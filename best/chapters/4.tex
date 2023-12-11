@@ -1,0 +1,89 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter[four]{two isn't even divisible by three though}
+
+the other big thing that matters about bases is their factors. among other things, factors a base considers important influence divisibility tests -- quick ways to check divisibility by certain numbers, without having to do actual division. divisibility tests come in many shapes and sizes, but the most common ones are:
+
+\begin{itemize}
+	\item if the final digit of $n$ shares a factor with $b$, then $n$ also shares that factor with $b$.
+	\item if the digit sum of $n$ shares a factor with $b - 1$, then $n$ also shares that factor with $b - 1$.
+	\item if the \emph{alternating} digit sum of $n$ shares a factor with $b + 1$, then $n$ also shares that factor with $b + 1$. ``alternating sum'' means it alternates between adding and subtracting digits.\myfootnote{}
+\end{itemize}
+
+the most well-known decimal divisibility tests are examples of the above. in decimal, if the final digit of a number is a multiple of 5, the entire number is, because 5 is a factor of 10. if the digit sum of a number is divisible by 3, so is the number, because 3 is a factor of 9, which is one less than 10. and if the alternating sum is divisible by 11, so is the number, because 11 is one more than 10.\myfootnote{}
+
+but there's more to it than that. base 10 is also base 100 in disguise, since pairs of decimal digits correspond to entire base-100 digits. so by looking at the last \emph{two} digits, you can check if a number is divisible by 25, which is a factor of 100. and with an alternating sum of \emph{pairs} of digits, you can check if a number is divisible by 101, and so on. so in theory, there is a divisibility test from one of those families for \emph{any number} in every base $b$, because every number coprime to $b$ will divide $b^n - 1$ or $b^n + 1$ for some $n$: a consequence of Fermat's Little Theorem.\myfootnote{}
+
+however, there is a limit of practicality. you probably learned that there is no divisibility test for 7, and that's kinda true. 7 is coprime to 10, and it also doesn't divide one less than any small power of 10. it \emph{does}, however, divide 1001, which is one more than $10^3$. so in theory, you could test if a number is divisible by 7 by grouping its digits into threes and finding the alternating sum -- but then the base cases would still be all the multiples of 7 up to 1000, way beyond the scope of mental arithmetic.\myfootnote{}
+
+factors are the biggest selling point of seximal in {\it a better way to count}. 6 is divisible by 2 and 3, which are the first two primes, and is \emph{adjacent} to 5 and 7, which are the next two primes. this mathematical coincidence makes seximal astonishingly good at calculations involving the first few primes. and at first glance, this appears to be a big weakness for binary: after all, 2 is a prime number, so only calculations involving 2 are made trivial, at the cost of everything else... right?
+
+we can follow the trail of thought in {\it a better way to count} and compare seximal to binary by setting up a tier list of prime factors for both -- kind of like a certain game show.\mytranscript{34:27} here's what that would look like:
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		2 divides 6; {\bf S tier}. &
+		2 also divides 2; {\bf S tier}. \\
+		\hline
+		\multirow{2}{*}{3 divides 6; {\bf S tier}.} &
+		3 doesn't divide 2 or $2 - 1$, \\
+		&
+		but it does divide $4 - 1$. {\bf B tier}. \\
+		\hline
+		5 doesn't divide 6, &
+		5 doesn't divide 2, $2 - 1$, $4 - 1$, or $8 - 1$, \\
+		but it does divide $6 - 1$. {\bf A tier}. &
+		but it does divide $16 - 1$. {\bf D tier}. \\
+		\hline
+		7 doesn't divide 6 or $6 - 1$, &
+		7 doesn't divide 2, $2 - 1$, or $4 - 1$, \\
+		but it does divide $36 - 1$. {\bf B tier}. &
+		but it does divide $8 - 1$. {\bf C tier}. \\
+		\hline
+		\multicolumn{2}{|c|}{11 divides $6^{10} - 1$ and $2^{10} - 1$.
+		{\bf ultra-F tier} for both.} \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\bigskip
+
+if we look at this tier list, then pretty obviously seximal is \emph{way} better than binary, being either tied or significantly better in every category. so what's the big deal? isn't this the argument that shatters binary in the end, despite everything brought up so far? or maybe this analysis is just superficial?\myfootnote{}
+
+to see why the tier list argument doesn't cover the full picture, we need to understand \emph{why} divisibility tests aren't good sometimes. in almost every base, some numbers, called \emph{cyclic numbers}, are pesky, like 7 in decimal, 5 in dozenal, or 11 in seximal. there is a rigorous definition for ``$x$ is a cyclic number in base $b$'', but we won't need it quite yet: for now, we can just think of them as those numbers where the smallest $n$ such that $x$ divides $b^n - 1$ is big. it's conjectured that almost every base has infinitely many cyclic numbers -- we'll get to exactly which ones don't, but for now we can assume it's basically all of them. in a way, cyclic numbers are a base's Achilles heel, and that's where we usually say ``there's no divisibility test''.
+
+but the test for 7 in decimal isn't \emph{inherently} bad; the reason \emph{why} it's bad is because it requires knowing all multiples of 7 up to 1000, which is too many to be feasible. these tests require knowledge of all multiples of some number up to a power of the base; but powers of the base grow exponentially, very quickly exceeding the limits of human arithmetic abilities: \emph{this} is what \emph{actually} makes these tests bad.
+
+if we get caught in this trail of thought, though, it's easy to forget that the base's \emph{size} has a big impact on its first few powers, and this entire argument falls apart for binary. $6^3$ and $6^4$ may be overwhelming, but $2^3$ and $2^4$ are perfectly fine. 5 is cyclic in both binary and dozenal, but in dozenal, you need to know the multiples of 5 up to 144, whereas in binary, you need to know them up to... um... 4.\myfootnote{} for most bases, only the base itself and maybe its square are small enough, but for binary, you can go up to the fifth power before things start becoming too big. and so, what doesn't work for seximal and decimal can very well work for binary.
+
+here's a few examples on some actual divisibility tests. the first few odd numbers have this nice sequence of tests that's very easy to learn.
+
+\begin{itemize}
+	\item $3 = 4 - 1$: sum of pairs of bits.
+	\item $5 = 4 + 1$: alternating sum of pairs of bits.
+	\item $7 = 8 - 1$: sum of triplets of bits.
+	\item $9 = 8 + 1$: alternating sum of triplets of bits.
+\end{itemize}
+
+3 even has an alternative test, using the alternating sum of single bits. and in reality it's often even easier, because remember that many binary numbers can be factorized just by looking for repeating patterns.\myfootnote{}
+
+divisibility tests also have implications for things such as primality testing: quickly ruling out numbers that clearly aren't prime. it's true that in seximal, every prime other than the factors of six ends in either 1 or 5 -- a fact noted by Leibniz himself.\myfootnote{} but if you allow tests other than just looking at the final digit, then both binary and seximal are tied here, with $11^2$ being the first number that ``looks prime'' but actually isn't.\myfootnote{}
+
+as an aside, what about testing for perfect squares? r/seximal says that, after removing an even number of zeros, the last seximal digit of any perfect square is 1, 3, or 4 -- only 3 out of 5 options.\myfootnote{} but in \emph{any} base, it's at most half of all the possible digits rounded up, so this is actually the worst case.\myfootnote{} in binary, on the other hand, after removing an even number of zeros, the last \emph{three} bits of any perfect square are 001.\myfootnote{}
+
+binary also has an unexpected benefit from only having one prime factor: it automatically factors any number into a power of two (the trailing zeros) and an odd number (the remaining bits). these are orthogonal to each other in many ways, and can be used to split up many tasks. for example, to test if 12 divides 72, you can test separately if their power of two parts divide -- so if 4 has at most as many trailing zeros as 8 -- and if their odd parts divide, so if 3 divides 9.\myfootnote{}
+
+such a factorization is far less useful in bases like seximal, with both 2 and 3 as prime factors, because it lumps them into a single power of six component -- as if it was trying, but failing, to juggle both two and three, so it ended up taping them to one another and calling it a day. for example, to test divisibility by $2^3$ in seximal, you need to look at a number's last \emph{three} digits, essentially as if you were testing for $6^3$. and trailing zeros in multiplication are always additive in binary -- not so in seximal, where $\text{``2''} \times \text{``3''} = \text{``10''}$. so even though seximal can test both 2 and 3 just by looking at the final digit, while binary needs a digit sum test for 3, in the long run binary has the advantage of simplicity and regularity.\myfootnote{}
+
+so then, from what we've seen, it might appear that binary is tied with seximal when it comes to divisors, both failing at 11 -- the first prime that's not adjacent to a power of two, and the first that neither binary nor seximal can easily handle. but there is a tie-breaker to this tie. 11, and similar pesky numbers, hide a deeper mystery. what if binary had a way to perform a divisibility test by \emph{any} arbitrary number? one that does not involve division, and works no matter how annoying the number is?
+
+let's write down the sequence of powers of two modulo 11. another way to phrase it is that we start with 1, and for every next entry, we double the previous, but subtracting 11 if we exceed it. this sequence will go 1, 2, 4, 8, 5, 10, 9, 7, 3, 6, and then 1 again, looping around. this is the ``magic sequence'' for 11: in a moment you'll understand its namesake. let's take some binary number, say, this one right here. we'll write the magic sequence underneath the bits, starting at the least significant one, like this.\mytranscript{40:45} and now, if we add up all the terms underneath a 1 bit, the result is 11, which means we just verified that 66 is divisible by 11 in binary!\myfootnote{} and even though this is most useful for cyclic prime numbers, it actually works with \emph{any} number. that's right: you can test divisibility of any number by \emph{any $n$ whatsoever} by writing the magic sequence for $n$ underneath the number's bits and then adding up all the terms underneath a 1 bit: if the result is divisible by $n$, then so is the original number.\myfootnote{} in fact, it turns out \emph{every} divisibility test we've looked at so far is some special case of these magic sequences.\myfootnote{}
+
+you \emph{could} do the same test in higher bases, but it becomes significantly more difficult to the point where it's not viable. for one, to generate the magic sequence, you have to write the powers of the \emph{base}, meaning that you'll overflow a lot faster, often \emph{multiple times per entry}. and then on top of that, you have to multiply each term in the magic sequence by the digit it corresponds to, and add up all those results.\myfootnote{}
+
+in seximal, there is just no other way to counter the argument that you can't divide by eleven, other than to bury it away and say that you'll never need to use eleven anyway. but binary has a doable \emph{universal} divisibility test. so while every base has its Achilles heels when it comes to divisibility tests, binary, just due to its simplicity, can fight back and persevere where other bases just completely give up.
+
+\end{document}

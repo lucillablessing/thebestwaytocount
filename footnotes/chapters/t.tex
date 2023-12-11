@@ -1,0 +1,134 @@
+\documentclass[../footnotes.tex]{subfiles}
+
+\begin{document}
+
+\mychapter{transcripts}
+
+\mytranscript{2:46} Misali and their fanbase are jokingly represented here as a seximal organization. its logo is depicted. \\ the logo's shape is a bright yellow circle. in the center is a yellow hexagon with the corners numbered 0, 1, 2, 3, 4, 5. inside the hexagon is a small hexagonal grid of 7 cells resembling a honeycomb, and overlaid on top of that grid is a simplistic geometric representation of a bee. around the circumference of the circle, there is black text in Comic Sans in all caps: on top, it says {\tt SEXIMAL.} and on the bottom, {\tt 012345 MAL BEST MAL.} \\ this logo is a joke on many levels:
+
+\begin{itemize}
+	\item its visual layout is a reference to the logo of Volap\"uk, which is also a circle with text on the top and bottom, saying {\tt VOLAP\"UK.} and {\tt MENEFE BAL P\"UKI BAL.} respectively. the Seximal logo has the same number of letters.
+	\item the enumeration of seximal digits is a reference to the thumbnail of {\it a better way to count}, which enumerates the twelve dozenal digits in a diagram listing the twelve chromatic notes.
+	\item the ``mal'' comes from the ending of ``seximal'', but it also refers to the prefix {\it mal-} in Misali's base-naming system, which uses it to mean ``times 17''. this, in turn, comes from the prefix {\it mal-} in Esperanto, which confusingly means ``opposite'' despite looking like it means ``bad'', and the fact that 17 is a bad choice of base.
+\end{itemize}
+
+\mytranscript{3:43} the binary representation of the number 37 is interpreted as a decomposition of 37 into ``additive primes''. the set of ``additive primes'' under 37 is 1, 2, 4, 8, 16, and 32; and the ``prime summandization'' of 37 is $32 + 4 + 1$. 37, then, can be represented by starting from the largest additive prime not greater than it, and descending all the way to 1, marking the presence and absence of each additive prime in the target number. in this way, 37 is represented as ``32, no 16, no 8, 4, no 2, 1'', which becomes ``yes, no, no, yes, no, yes'', or 100101.
+
+\mytranscript{3:50} this same binary representation of 37 can also be interpreted another way: as a game of {\it twenty questions} attempting to guess its position on the number line. since zero questions are sufficient to guess a number from a range of one, and each question has the maximum potential to double the guessing space, we can surpass 37 with a minimum of six questions, which puts us in a range of $[0, 64)$. then each question asks if the target number is within the higher half of the current range:
+
+\begin{itemize}
+	\item $37 \geq 32$: range is now $[32, 64)$;
+	\item $37 <    48$: range is now $[32, 48)$;
+	\item $37 <    40$: range is now $[32, 40)$;
+	\item $37 \geq 36$: range is now $[36, 40)$;
+	\item $37 <    38$: range is now $[36, 38)$;
+	\item $37 \geq 37$: we guessed 37.
+\end{itemize}
+
+as before, the answers to the questions if 37 is greater than or equal to whatever number spell out ``yes, no, no, yes, no, yes'', which is 100101: the same representation as above.
+
+\mytranscript{8:43} description of proposed binary digits: both are vertical bars. their bottom ends are aligned with each other, and 0 is a lot shorter than 1. groups of bars can be joined by connecting their bottom ends with a horizontal line.
+
+\mytranscript{10:35} consider the number one hundred. in binary, it's written 1100100. grouping by threes, it's 1,100,100. in base 8, it's 144, and translating those digits into triplets of binary digits, it's 001,100,100. this is the same as the binary from earlier, except it has two redundant zeros at the beginning.
+
+\mytranscript{18:08} description of binary finger counting: each finger of one hand represents a bit. the bit's value is 1 when the finger is extended, and 0 if it's curled. the least significant bit is the thumb, representing 1, all the way to the pinky, representing sixteen. so a clenched fist is 0, then a fist with the thumb extended is 1, then curling the thumb back in and extending the index finger gives 2, and so on, up to 31 with all five fingers extended. you can use your other hand for five more bits to count up to $2^{10}$.
+
+\mytranscript{20:32} if someone shows you a seximal number with their hands that consists of two fingers in one hand and three in the other, you can't tell if they aligned the digits left to right from your perspective or theirs -- if the number is seximal 23 or seximal 32. even if you establish a convention about which of the two perspectives it should be, it's very easy to make a mistake.
+
+\mytranscript{25:09} some binary sums of points from a Scrabble game are shown, annotated to explain how they were calculated. in most cases, the numbers can be mentally split into segments with no carrying, where the addition is just bitwise OR; segments where the bits of both numbers are identical, so the sum just shifts them all to the left by one; and segments where a single 1 is added to a series of 1s, equivalent to adding a 1 to a series of nines in decimal. sometimes, the common ``idiom'' $5 + 3 = 8$ appears, and occasionally, the easiest strategy really is to add in a power-of-two base -- for instance, when one of the summands is one less than a power of two.
+
+\mytranscript{27:49} the binary number 11011 is depicted. the pattern 11, which represents 3, occurs twice. the first time, it starts at position 0 from the right; the second time, at position 3 from the right. a binary number that contains ``1'' bits at exactly those positions is 1001, which means 9. so the original number, 11011, must be equal to 3 times 9, which is 27.
+
+\mytranscript{30:12} the example for how to take a binary square root is the binary number 10101001 (split into pairs: 10,10,10,01). we start by writing 1 above the first pair, 10, and subtracting 1 from it to get $10 - 1 = 1$. joining on the next pair gives 110, our current working value. the answer we know so far is 1, and joining on the digits 01 gives 101. we test if the working value, 110, is greater or equal -- which it is. so the next pair will get 1 as its digit, and we'll subtract the 101 from our working value, getting $110 - 101 = 1$. joining on the next pair gives 110. the answer we know so far is 11; joining on 01 gives 1101. this time the working value is less, so the next digit is 0 and we don't subtract anything from the working value. finally, we join on the final pair to get 11001, and the answer we know so far is 110; joining on 01 gives 11001. if we test whether the working value is greater or equal, we find that it is; in fact it's exactly equal, so the final digit of the answer is 1, and subtracting gives a remainder of zero, so the algorithm stops. thus our answer for the square root of 10101001 is 1101, which checks out: in decimal, the square root of 169 is 13.
+
+\mytranscript{34:27} the background turns purple and the following title appears on the screen: ``What's the Most Commonly Used Prime Which Is Incompatible with This Particular Base?\texttrademark''. this is a joke that refers to Misali's {\it Conlang Critic} series. in videos about international auxiliary languages, there is a recurring gameshow-like segment with a similar ridiculously long name, where the language's consonant inventory is tested for compatibility with the most commonly spoken languages.
+
+\mytranscript{40:45} this demonstration involves the binary number 1000010, which is 66. writing the magic sequence underneath the bits, from right to left, puts the number 2 underneath the first 1, and the number 9 underneath the second 1. adding them up, $2 + 9 = 11$, which verifies that the original number is divisible by 11.
+
+\mytranscript{43:40} description of binary fraction symbols: the radix point is a vertical bar of about the same length as the digit 0, but extending below the baseline instead of above. the recurring point is like the radix point, but with an additional horizontal line attached to the bottom end and extending towards the right. the length of this line doesn't matter; in particular, it doesn't necessarily extend over the entire period of the fraction.
+
+\mytranscript{48:07} a screenshot of seximal.net appears, showing the page that contains Misali's brief summaries of other bases. there are also comments in magenta added into the screenshot. the bases featured are all the powers of two on the site:
+
+\begin{itemize}
+	\item {\bf binary}: bases don't get much smaller than this, so it's really bad when it comes to compactness. -- {\tt :(}
+	\item {\bf quaternary}: four is a highly composite number, and it's right between two primes, so it's really almost as good as seximal, just a bit smaller. -- {\tt c:}
+	\item {\bf octal}: sometimes used for binary compression, but it isn't really all that good at that. like, quaternary is better at compressing binary even though it's a smaller base. -- {\tt who woulda guessed}
+	\item {\bf hex}: everyone's favorite way to compress binary, and for good reason! -- {\tt ;)}
+	\item {\bf tetroctal}: another power of two, and this one is the WORST ONE!! -- {\tt >:(}
+	\item {\bf octoctal}: yet \emph{another} power of two base. this one is used for youtube URLs and stuff. it’s not super practical as a numbering system, but as a way of representing binary numbers in a way that's human readable while not taking up too much space it's pretty good. -- {\tt youtube transfers audio data as base64}
+\end{itemize}
+
+\mytranscript{48:10} a screenshot of BASE OFF is shown, where a user has eliminated every base in the range of two to ten except for two and four. now, no matter how the yes/no questions are answered, the only possible outcomes are to end with base four or be stuck forever.
+
+\mytranscript{48:15} the image from the Artifexian video is a table of fractions from $1/2$ to $1/20$ and their representations in various power of two bases, from 2 up to 32. the original gives a base one point for a given fraction if no other considered base's representation has fewer digits; so for example all bases get a point for $1/2$, since each represents it with one digit, but only base 32 gets a point for $1/11$, writing it with two recurring digits, while all the others need either ten or five. base 16 wins with 13 points, and base 2 is the worst with only 1 point. the ``corrected'' version instead takes into account the relative sizes of the digits; so now only base 2 gets a point for $1/2$, and bases 2, 4, and 32 all get a point for $1/11$. binary is the new winner, trivially getting a point for every base, and the bigger the base, the fewer points it scores, down to just 1 point for base 32.
+
+\mytranscript{51:37} among the first ten positive integers, seven are compatible denominators for seximal. however, the figure is only 20 out of the first hundred; starting at 40, each decade of numbers only contains at most one compatible denominator.
+
+\mytranscript{52:07} the comment says the following:
+
+\begin{quoting}
+    Balanced dozenal is like two back-to-back seximal systems, with the best of both worlds: the size and factors of dozenal, but the products and fractions of seximal. Fifths are two digits; sevenths are three. Check out \verb#http://www.musa.bet/reverse.htm#
+\end{quoting}
+following the website, it turns out one seventh in balanced dozenal is written as a recurring ``$2, -3, -5, -2, 3, 5$'', with six recurring digits, of which the second half are the negatives of the first half. the website counts this as three recurring digits -- which, if you do that, there's no reason not to count the two complementary halves in any base as half the length.
+
+\mytranscript{55:56} most languages don't pronounce 42 as their equivalent of {\it four two} (represented as ``insert words''), but as the equivalent of {\it four ten two} (represented as ``insert more words''). this is a joke about a hypothetical language where those could be literal glosses if ``insert'' was the word for four, ``words'' for two, and ``more'' for ten.
+
+\mytranscript{1:00:17} some examples of spoken binary are listed, both before and after abbreviating {\it two one} to {\it three}:
+
+\begin{center}
+	\begin{tabular}{|c|l|l|}
+		\hline
+		\bf number & \multicolumn{2}{|c|}{\bf name} \\
+		\hline
+		1  & \verb#                 one# & \verb#           one  # \\
+		2  & \verb#             two    # & \verb#           two  # \\
+		3  & \verb#             two one# & \verb#           three# \\
+		4  & \verb#        four        # & \verb#      four      # \\
+		5  & \verb#        four     one# & \verb#      four one  # \\
+		6  & \verb#        four two    # & \verb#      four two  # \\
+		7  & \verb#        four two one# & \verb#      four three# \\
+		8  & \verb#two     four        # & \verb#two   four      # \\
+		9  & \verb#two     four     one# & \verb#two   four one  # \\
+		10 & \verb#two     four     two# & \verb#two   four two  # \\
+		11 & \verb#two     four two one# & \verb#two   four three# \\
+		12 & \verb#two one four        # & \verb#three four      # \\
+		13 & \verb#two one four     one# & \verb#three four one  # \\
+		14 & \verb#two one four two    # & \verb#three four two  # \\
+		15 & \verb#two one four two one# & \verb#three four three# \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\mytranscript{1:00:53} a thumbnail of a Minecraft gameplay video is depicted. in the thumbnail, there is a player wearing full diamond armor in a dungeon and a representation of 64 diamonds in item form. the title of the video is ``I've got a stack of diamonds to spend!'', indicating that the proposal is to give the number 64 the irregular name ``stack''.
+
+\mytranscript{1:07:15} this is a joke about how looking up ``dual number'' on Wikipedia brings up an article about mathematics instead of linguistics. the correct article's title is ``Dual (grammatical number)''.
+
+\mytranscript{1:07:19} Toki Pona only has three number words: {\it wan} meaning one, {\it tu} meaning two, and {\it mute} meaning any number greater than two, which is functionally identical to having a singular-dual-plural number distinction. this is contrasted with a proposal of a seximal number system for Toki Pona described on seximal.net, where the word {\it luka}, which literally means ``hand'', is confusingly used for 6.
+
+\mytranscript{1:08:00} a quote from John Nystrom's book about a binary system is shown on screen, the same one as from chapter two, talking about introducing a decimal system into music:
+
+\begin{quoting}
+    In music, the tonal system is in full operation; the notes are divided, as regards time, into halves, quarters, eighths, etc. A bar of music is generally expressed by quarters or eighths, and a burden has generally 8 or 16 bars.
+\end{quoting}
+
+\mytranscript{1:11:48} right at the very end, right before the ``thank you for watching'' screen, an image is displayed that humorously summarizes {\it a better way to count}. (``K\"onKlwJun'' is how the constructed language V\"otgil, repeatedly made fun of in Misali's {\it Conlang Critic} series, would spell ``conclusion''.)
+
+{ \tt
+a beder wey 2 count lol xd \\
+- haha look at me i make fun of dozenal \\
+- haha look i give my new numbers funny names \\
+part 1: six is smol \\
+- excuses why seximal numbers take up more space. \\
+oh and if you don't like that you can use this ebcdic clone i made \\
+part 2: most people have 6 fingers \\
+- no they don't but who cares? seximal is better full stop \\
+part 3: seximal fractions \\
+- haha boppy tune \\
+- we don't talk about elevenths \\
+because both decimal and dozenal do them well \\
+part 4: K\"onKlwJun \\
+- seximal is the bestimal because i threw some smart words at you. \\
+now go preach the truth about haha funny sex word base
+}
+
+\end{document}

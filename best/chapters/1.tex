@@ -1,0 +1,53 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter[one]{two is a very small number}
+
+one thing that matters for a base's efficiency is its size. larger bases can write the same numbers in fewer digits, but their digits also measurably contain more information, so we need to find a compromise between the number of digits and the information cost per digit.
+
+it turns out that one of those factors is a lot more significant than the other. if we compare two similarly sized bases, like decimal and dozenal, then for a long while they'll represent a large percentage of numbers with the exact same number of digits, with only small ranges where the larger base wins by one digit. a permanent difference doesn't happen until a very large number.\myfootnote{}
+
+you can quantify this even further with {\it radix economy}: an analysis of the long-term efficiency of a base, taking into account both the lengths of numbers in digits and the information content of those digits. since a number's information content is proportional to its logarithm,\myfootnote{} radix economy can be seen as a measure of how close the discrete representations in various bases can come to this ideal. intuitively, smaller bases will perform better here, since they can quantize this information into finer steps.
+
+but there seems to be a misconception about radix economy that, allegedly, base $e$ is the most efficient of all, or among integer bases, base 3.\myfootnote{} this shows up \emph{everywhere} in the discussion of numeral systems, even the Wikipedia article about base 3, and even seximal.net.\myfootnote{}
+
+speaking of which, why is base four ``really almost as good as seximal, just a bit smaller'', but then binary is so much worse? but we've already established that base four has no advantages whatsoever over binary, it's purely less efficient...
+
+anyway, radix economy. to start comparing different bases for efficiency in writing numbers, we first need a formula for how much information is contained in a given base's representation of a number. to do that, we need to consider a detail we've been ignoring.
+
+so far, we've glossed over the fact that any numeral string in any base can be made longer simply by adding zeros to the left-hand side. this technically makes it ambiguous how many digits such a string actually contains. we can solve this by saying the leftmost digit \emph{cannot} be 0, and we can meaningfully say that this leftmost digit carries slightly less information than all the other digits. so in a decimal number, most digits contain a full decimal digit of information, but the leading digit only contains a \emph{nonary} digit's worth of information, since it only has nine possible values.\myfootnote{}
+
+alright, with that out of the way, we can construct a formula. in a base-$b$ representation of a number $n$, there are $\lfloor \log_b(n) \rfloor$ digits that can take the entire range of values from 0 inclusive to $b$ exclusive, plus one digit with the slightly smaller range of 1 inclusive to $b$ exclusive. and since the information contained within a digit is proportional to the logarithm of its number of possible values,\myfootnote{} this gives us this formula:
+
+\begin{equation*}
+	\text{cost} = \lfloor \log_b(n) \rfloor \cdot \log(b) + \log(b - 1)
+\end{equation*}
+
+using this formula, comparing results for different bases, we can come to some conclusions. for similarly sized bases, like two and three, there are regions where one base performs better and regions where the other performs better. the exception is when one base is a power of the other, like two and four: in those cases, the power base is \emph{always} worse.\myfootnote{} no idea what Misali is on about when they say in {\it seximal responses} that base four is ``just a more efficient version of binary'': it's clearly the other way around.\myfootnote{}
+
+but we can learn a lot more by dividing the cost by the actual amount of information, the logarithm of the number $n$ itself. after some simplifying, we end up with this neat equation:\myfootnote{}
+
+\begin{equation*}
+	\text{radix economy} = \frac{\lfloor \log_b(n) \rfloor}{\log_b(n)} + \frac{1}{\log_{b-1}(n)}
+\end{equation*}
+
+and if we graph this formula to see how it behaves for large values of $n$, and compare the results for different bases $b$, we find that base three isn't the most efficient, not by a long shot: binary is.\myfootnote{} in fact, any other base doesn't even come close.
+
+but is this a trick? have we manipulated the definition of radix economy to make binary turn out better? after all, this definition is completely different from the one in the Wikipedia article on radix economy, so what's up with that?\myfootnote{}
+
+the key is that leading digit, carrying slightly less information than the rest. in most bases, this slight decrease in information makes hardly any difference. but in binary, where the only two options for a digit are 0 and 1, excluding 0 means it can \emph{only} be 1. since it can only ever be one value, it contributes \emph{no} information whatsoever.\myfootnote{} it still matters, of course -- it contributes to arithmetic, after all -- but in terms of actually determining the number's value, it might as well not be there at all. we can meaningfully say the leading bit doesn't count as an actual digit in these strings.\myfootnote{}
+
+\emph{this} is what makes binary perform so much better than any other base. because it's equal to $1 + 1$, it's the only base $b$ for which $\log(b - 1) = 0$.\myfootnote{} and because of the notation we're using, this victory of binary is directly visible in the compactness of numbers -- unlike in seximal, where radix economy is just an imaginary concept, to justify that the numbers are in fact \emph{longer}.
+
+so then, where did this misconception with base three come from? well, let's look at the formula shown in the Wikipedia article and see for ourselves:
+
+\begin{equation*}
+	\text{radix economy*} = \frac{b \cdot \lfloor \log_b(n) + 1 \rfloor}{\log(n)} \approx \frac{b}{\log(b)}
+\end{equation*}
+
+firstly, the formula multiplies the number of base-$b$ digits by $b$ itself, not $\log b$, which is wrong: the information contained in an object is proportional to the \emph{logarithm} of the number of its possible states.\myfootnote{} another error is failing to take into account the slightly lower information content of the most significant digit -- without it, it becomes a lot harder to see which base is the winner.
+
+but even just looking at the conclusions this formula leads to: not only is base three allegedly the most efficient, but two is \emph{tied} with four as second most efficient, even though we already established that base four is purely a downgrade! it just doesn't add up. base efficiency doesn't have a local minimum around $e$: it is strictly decreasing.
+
+\end{document}

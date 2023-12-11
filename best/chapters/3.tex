@@ -1,0 +1,59 @@
+\documentclass[../best.tex]{subfiles}
+
+\begin{document}
+
+\mychapter[three]{binary arithmetic is easy}
+
+one of the most obvious properties of binary is how simple arithmetic becomes, both written out and mental. however, it's easy to be overly reductionist here and jump to conclusions too early, with some arguments even spinning this aspect of binary into a \emph{negative}. so let's have a look at exactly what implications it has on the basic arithmetic operations.
+
+{\bf addition \& subtraction:} the written algorithm for addition requires us to add two numbers digit by digit, carrying if necessary, thus reducing an addition problem to a sequence of one-digit sums. so across different bases, it appears to be a choice between more digits or more effort to add these digits.\myfootnote{} (subtraction follows the same principles, so we'll only be looking at addition here.)
+
+to add using this algorithm, you need to be able to add single digits first. children usually learn this by doing lots of addition problems and internalizing patterns, and anyone switching to a new base would need to do the same. a table of such patterns is a series of diagonal stripes, which grows linearly with the base's size. in binary, however, single digits are as simple as they can get: there is no hurdle to overcome, and you can start adding things instantly.\myfootnote{} a lot of the time, you don't even need to carry at all, and addition is little more than matching up the bits set to 1 in both numbers -- a bitwise OR, if you prefer.\myfootnote{}
+
+in fact, addition in binary is so easy that many people argue it's \emph{too} simple, by which they mean it's not faster enough that this outweighs the need to add more digits. for example, Tab Atkins writes:\myfootnote{}
+
+\begin{quoting}
+	{[...]} our brain can't arbitrarily reallocate ``processor cycles'' like a computer can, so when we undershoot we're just wasting some of our brain's ability (and, due to the tradeoffs, forcing something else to get harder). So, we know from experience that binary is bad on these tradeoffs -- base-2 arithmetic is drastically undershooting our arithmetic abilities.
+\end{quoting}
+
+this might be right, but only under the assumption that people always do arithmetic digit by digit -- which we don't. we aren't quite as fast as computers, but we make up for it by recognizing patterns. in decimal, we don't need to add digit by digit to add $25 + 75$. in binary, you can do the same thing: once you're able to add \emph{pairs} of digits all at once, nothing's stopping you from doing that. triplets? go right ahead.
+
+but then how is that any different from addition in a power-of-two base? the difference is that in higher bases, you can't reduce single-digit addition any further: once you're on that level and you happen to be stuck, tough luck. you have to first overcome that hurdle of adding single digits. meanwhile, in binary, there's a \emph{learning curve} where you get gradually faster and more proficient, instead of a single hurdle you need to overcome right from the start. and whenever you get stuck at a higher level, you're not helpless: you can always fall back to a lower level for one moment.
+
+moreover, power-of-two bases only let you combine digits in one specific way in certain specific positions, when grouping them in more fluid ways could let you add much faster -- and in \emph{fewer} steps. seximal addition may make things easier at the digit level at the cost of needing more steps, while dozenal does the opposite; but \emph{binary} addition makes things easier \emph{and} reduces the number of steps \emph{at the same time}.\mytranscript{25:09}
+
+{\bf multiplication:} here's where things start to get interesting. written multiplication essentially has you multiply each digit of one number with each digit of the other, then add them up. often these products have two digits; in those cases you have to carry, and this time the carry can take a wide range of values.\myfootnote{}
+
+unlike addition, which usually has no systematic way of teaching its prerequisite -- adding single digits -- multiplication \emph{does} have such a method: the infamous multiplication table.
+
+the decimal multiplication table has 100 entries: one for each of ten rows and ten columns. but we can eliminate the rows for 0 and 1, because those are trivial, and we can eliminate anything below the main diagonal, because natural number multiplication is commutative,\myfootnote{} leaving us with just 36 entries.
+
+...but wait. was that really necessary? the size of a multiplication table grows quadratically with the base's size, whether or not you obfuscate the table in this way. quadratic functions grow far faster than linear functions of the same argument, so here, larger bases are punished even more, and smaller bases are rewarded even more. \emph{this} is what matters. shaving off individual entries is more of a rhetorical gesture to make one particular base appear nicer.\myfootnote{}
+
+what about binary, then? binary has four entries, all of which are either 0 or 1 -- binary being the only base whose multiplication table consists entirely of one-digit numbers.\myfootnote{} we'll get to the significance of this result in a bit. if you insist on obfuscating the table, then it turns out to have \emph{zero} entries, which means you can say binary is the only base with no multiplication table at all!
+
+to see the implications this has, let's look at the algorithm for written multiplication again. we multiply the top number by every digit of the bottom number in turn. in other bases, the top number is also broken down into digits, so that you're only ever multiplying single digits. but in binary, there's no need to do this. the only possible digits are 0 and 1, and multiplying anything by either of those digits is trivial. if it's a 0, just skip it entirely; if it's a 1, just copy the number at that position. because the binary multiplication table only consists of one-digit numbers, \emph{carrying never happens}. the entire process involves just copying the top number at every position that has a 1 in the bottom number, and then adding those up together. because binary is so small, several layers of complexity are removed entirely from the multiplication algorithm. multiplication in binary is so easy that an algorithm used by both Egyptian scribes and Russian peasants to multiply numbers essentially boils down to converting one or both of them to binary.\myfootnote{}
+
+but it doesn't stop there.\mytranscript{27:49} the simplicity of binary multiplication also lets you factorize some numbers just by looking at them,\myfootnote{} and it completely eliminates the need for doubling and halving -- the two most common kinds of scaling. the award for making the most cases of multiplication trivial goes to binary.\myfootnote{}
+
+{\bf division:} the written algorithm for division, called long division, is notoriously difficult compared to the other three elementary operations. at every step, you have to find the smallest part of the dividend greater than or equal to the divisor, and to write a digit of the answer, you have to estimate how many times it goes into the divisor. then, multiply the divisor with the quotient you just found, and subtract that to obtain a remainder to continue with the next step.
+
+but where are you supposed to know that quotient from? there's no ``division table'' like there is a multiplication table, and it's not like you can do separate long divisions for those particular steps, either. you just have to guess. and even though the guessing becomes easier, faster, and more intuitive over time, it feels hopeless when you first start out. even Misali admits that this is where seximal fails:\myfootnote{}
+
+\begin{quoting}
+	to do division by hand, you gotta do long division, which is bad in any base, and you shouldn't ever have to use it. there isn't a cool thing about how seximal makes long division easy or anything like that; long division just sucks.
+\end{quoting}
+
+but hang on... say that again. is long division \emph{really} bad in \emph{every} base?
+
+here's what binary long division looks like: at every step, find the smallest part of the dividend greater than or equal to the divisor, and then you can write a digit of the answer. what digit? well, what digit \emph{can} you write? a 1. the part you have to subtract to obtain the remainder for the next step is always just your original divisor. that's literally all you need to do! the rest of the algorithm is the same as in any other base, but its most difficult part is completely skipped, just because binary is so small. no guessing required.\myfootnote{}
+
+{\bf square root:} hang on, \emph{square root}? since when has that been a thing? you probably don't know any algorithm for working out square roots, and for good reason: if you thought long division was difficult, well, the square root algorithm is layers of complexity above that. ...in most bases, that is.
+
+to take the square root of a binary number, first group its digits into pairs. one digit of the answer will appear above every \emph{pair} of digits of the input. the algorithm is similar to long division in that we'll be using working values from our input, and subtracting some numbers to obtain new working values, until we reach 0, when the algorithm terminates.\myfootnote{}
+
+to start, we write a 1 above the first pair, and subtract 1 from it. we join on the next pair. now we ask ourselves, if we took the part of the answer found so far, and joined on the digits 01 at the end, is our current working value greater than or equal to this? in our case, yes it is, so we write a 1 in the answer above this digit pair, and we subtract that thing we compared it against. we get a new remainder, and we continue in the same way. join it with the next pair. do the same test again? this time the answer is no, so we write a 0 in the answer and we don't subtract anything. finally, joining on the final pair of digits to the working value, and joining on 01 to the answer we know so far, is the working value greater or equal? yes, so we write a 1. and in fact it's exactly equal, which will mean the algorithm will stop here, because this time our difference will be 0. and just like that, we figured out that 13 is the square root of 169.\mytranscript{30:12}
+
+this same algorithm \emph{does} work in decimal too, but it becomes absolutely incomprehensible; there are just so many steps that completely disappear in the binary variant that it can hardly even be called the same algorithm anymore. for instance, the true-or-false question at each step is now a \emph{scale-of-one-to-ten} question about an entire decimal digit, which is answered by solving a miniature quadratic inequality in your head. also, the algorithm involves multiplying by the base times two and adding a one-digit number, which is reduced to a simple concatenation of 01 in the binary case.\myfootnote{} so even if this algorithm feels like just an arcane party trick, it still shows how binary's arithmetical superpower makes even terrifying operations like square roots feasible.
+
+\end{document}
